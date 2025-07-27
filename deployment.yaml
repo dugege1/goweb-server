@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-go
+  labels:
+    app: hello-world-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-go
+  template:
+    metadata:
+      labels:
+        app: hello-world-go
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: hello-world-go
+          image: duyuxin748/helloworld:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
